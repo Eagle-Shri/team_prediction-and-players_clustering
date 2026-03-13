@@ -294,3 +294,6 @@ For issues or questions regarding the LABEL_DBMS system, refer to the configurat
 **Project Status:** ✅ Active Development  
 **Last Updated:** January 6, 2026  
 **Version:** 1.0.0
+=======
+# team_prediction-and-players_clustering
+Hybrid Database System for Predictive Sports Analysis that combines structured and unstructured data to perform team outcome prediction and player clustering using machine learning techniques.
