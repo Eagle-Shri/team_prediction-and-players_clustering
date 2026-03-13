@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👥 Players Management - Football Performance System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: white !important;
+        }
+
+        .navbar .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            margin: 0 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .navbar .nav-link:hover {
+            color: white !important;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .container-main {
+            padding: 40px 20px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .section-header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-header h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .search-box form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box input {
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            min-width: 250px;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .add-player-section {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            margin-bottom: 40px;
+        }
+
+        .add-player-section h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .players-section {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .players-section h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-responsive-custom {
+            overflow-x: auto;
+        }
+
+        .table {
+            margin-bottom: 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table thead {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .table thead th {
+            border: none;
+            border-right: 1px solid #000;
+            padding: 18px 16px;
+            font-weight: 600;
+            text-align: left;
+            border-bottom: 2px solid #000;
+            font-size: 0.95em;
+        }
+
+        .table thead th:last-child {
+            border-right: none;
+        }
+
+        .table tbody tr {
+            transition: all 0.3s;
+            border-bottom: 1px solid #000;
+        }
+
+        .table tbody tr:hover {
+            background: #ecf0f1;
+        }
+
+        .table tbody td {
+            padding: 16px;
+            text-align: left;
+            vertical-align: middle;
+            color: #555;
+            border-right: 1px solid #000;
+        }
+
+        .table tbody td:last-child {
+            border-right: none;
+        }
+
+        .player-name {
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: left !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+
+        .player-name i {
+            font-size: 1em;
+            color: #3498db;
+            margin-right: 5px;
+        }
+
+        .badge-top {
+            background: #d4edda;
+            color: #155724;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .badge-avg {
+            background: #fff3cd;
+            color: #856404;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .badge-low {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9em;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            margin-top: 30px;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #999;
+        }
+
+        .empty-state i {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        .empty-state p {
+            font-size: 1.1em;
+            margin: 0;
+        }
+
+        .search-result-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-result-badge strong {
+            font-size: 1.1em;
+        }
+
+        .clear-search-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .clear-search-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section-header h2 {
+                font-size: 1.5em;
+            }
+
+            .search-box input {
+                min-width: 100%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+
+            .table {
+                font-size: 0.9em;
+            }
+
+            .table thead th {
+                padding: 12px 8px;
+            }
+
+            .table tbody td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid" style="max-width: 1400px; margin: auto;">
+        <a class="navbar-brand" href="{{ url_for('dashboard') }}">
+            <i class="bi bi-sphere"></i> ⚽ Football Coach Hub
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('dashboard') }}">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('players') }}">
+                        <i class="bi bi-people"></i> Players
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('activity_log') }}">
+                        <i class="bi bi-clock-history"></i> Activity Logs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}" style="color: rgba(255,255,255,0.9);">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-main">
+
+    <!-- Header Section with Search -->
+    <div class="section-header">
+        <h2>
+            <i class="bi bi-people-fill"></i> Players Management
+        </h2>
+        <div class="search-box">
+            <form action="{{ url_for('search_players') }}" method="POST">
+                <input type="text" name="name" placeholder="🔍 Search players by name..." required>
+                <button type="submit" class="search-btn">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="add-player-section" style="margin-bottom: 30px;">
+        <h3>
+            <i class="bi bi-funnel"></i> Filter Players by Performance & Rating
+        </h3>
+        
+        <form method="GET" action="{{ url_for('players') }}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; align-items: flex-end;">
+            <div class="form-group">
+                <label for="performance">
+                    <i class="bi bi-bar-chart"></i> Performance Category
+                </label>
+                <select id="performance" name="performance" class="form-control">
+                    <option value="all" {% if filter_info.performance == 'all' %}selected{% endif %}>All Players</option>
+                    <option value="Top Performer" {% if filter_info.performance == 'Top Performer' %}selected{% endif %}>⭐ Top Performers</option>
+                    <option value="Average Performer" {% if filter_info.performance == 'Average Performer' %}selected{% endif %}>📊 Average Performers</option>
+                    <option value="Low Performer" {% if filter_info.performance == 'Low Performer' %}selected{% endif %}>📉 Low Performers</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="min_rating">
+                    <i class="bi bi-star"></i> Min Rating
+                </label>
+                <input type="number" id="min_rating" name="min_rating" class="form-control" placeholder="0" min="0" max="100" step="0.1" value="{{ filter_info.min_rating or '' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="max_rating">
+                    <i class="bi bi-star"></i> Max Rating
+                </label>
+                <input type="number" id="max_rating" name="max_rating" class="form-control" placeholder="100" min="0" max="100" step="0.1" value="{{ filter_info.max_rating or '' }}">
+            </div>
+
+            <button type="submit" class="submit-btn" style="margin-top: 32px;">
+                <i class="bi bi-filter"></i> Apply Filter
+            </button>
+            <a href="{{ url_for('players') }}" class="submit-btn" style="margin-top: 32px; background: #6c757d; text-align: center; text-decoration: none;">
+                <i class="bi bi-x-circle"></i> Clear Filters
+            </a>
+        </form>
+    </div>
+
+    <!-- Add Player Form -->
+    <div class="add-player-section">
+        <h3>
+            <i class="bi bi-person-plus"></i> Add New Player
+        </h3>
+
+        <form id="playerForm" action="{{ url_for('add_player') }}" method="POST">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name">
+                        <i class="bi bi-person"></i> Player Name <span style="color: red;">*</span>
+                    </label>
+                    <input type="text" id="name" name="name" placeholder="e.g., Cristiano Ronaldo" required onchange="predictPlayerStats()">
+                </div>
+
+                <div class="form-group">
+                    <label for="age">
+                        <i class="bi bi-calendar"></i> Age <span style="color: red;">*</span>
+                    </label>
+                    <input type="number" id="age" name="age" placeholder="e.g., 25" min="16" max="45" required onchange="predictPlayerStats()">
+                </div>
+
+                <div class="form-group">
+                    <label for="positions">
+                        <i class="bi bi-diagram3"></i> Positions <span style="color: red;">*</span>
+                    </label>
+                    <input type="text" id="positions" name="positions" placeholder="e.g., ST, RW" required onchange="predictPlayerStats()">
+                </div>
+
+                <div class="form-group">
+                    <label for="overall_rating">
+                        <i class="bi bi-star"></i> Overall Rating <span style="color: red;">*</span>
+                    </label>
+                    <input type="number" id="overall_rating" name="overall_rating" placeholder="0-100" step="0.1" min="0" max="100" required onchange="predictPlayerStats()">
+                </div>
+            </div>
+
+            <!-- Hidden fields for cluster and performance_label -->
+            <input type="hidden" id="cluster" name="cluster">
+            <input type="hidden" id="performance_label" name="performance_label">
+
+            <!-- Prediction Section -->
+            <div id="predictionSection" style="display: none; margin: 25px 0; padding: 20px; background: #f0f4ff; border-radius: 12px; border-left: 4px solid #667eea;">
+                <h4 style="color: #667eea; margin-bottom: 20px; font-weight: 700;">
+                    <i class="bi bi-cpu"></i> AI Predictions
+                </h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #667eea;">
+                        <label style="color: #666; font-weight: 600; display: block; margin-bottom: 8px;">
+                            <i class="bi bi-tag"></i> Predicted Cluster
+                        </label>
+                        <div id="predictionCluster" style="font-size: 1.5em; font-weight: 700; color: #667eea;">-</div>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #667eea;">
+                        <label style="color: #666; font-weight: 600; display: block; margin-bottom: 8px;">
+                            <i class="bi bi-bar-chart"></i> Predicted Performance
+                        </label>
+                        <div id="predictionPerformance" style="font-size: 1.5em; font-weight: 700; color: #667eea;">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="addPlayerBtn">
+                <i class="bi bi-plus-lg"></i> Add Player to Database
+            </button>
+        </form>
+    </div>
+
+    <!-- Players List -->
+    <div class="players-section">
+        <h3>
+            <i class="bi bi-list-ul"></i> Player Database ({{ players|length }} players)
+        </h3>
+
+        {% if search_query %}
+        <div class="search-result-badge">
+            <strong>
+                <i class="bi bi-search"></i>
+                Search Results for "{{ search_query }}" ({{ players|length }} found)
+            </strong>
+            <a href="{{ url_for('players') }}" class="clear-search-btn">
+                <i class="bi bi-x-circle"></i> Clear Search
+            </a>
+        </div>
+        {% endif %}
+
+        {% if players %}
+            <div class="table-responsive-custom">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Player Name</th>
+                            <th>Age</th>
+                            <th>Positions</th>
+                            <th>Rating</th>
+                            <th>Cluster</th>
+                            <th>Performance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in players %}
+                        <tr>
+                            <td class="player-name">
+                                <i class="bi bi-person-fill"></i> {{ p.name }}
+                            </td>
+                            <td>{{ p.age }}</td>
+                            <td>{{ p.positions }}</td>
+                            <td>
+                                <strong>{{ "%.1f"|format(p.overall_rating) }}</strong>
+                            </td>
+                            <td>
+                                <span class="badge bg-info">Cluster {{ p.cluster }}</span>
+                            </td>
+                            <td>
+                                {% if p.performance_label == "Top Performer" %}
+                                    <span class="badge-top">⭐ {{ p.performance_label }}</span>
+                                {% elif p.performance_label == "Average Performer" %}
+                                    <span class="badge-avg">📊 {{ p.performance_label }}</span>
+                                {% else %}
+                                    <span class="badge-low">📉 {{ p.performance_label }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{{ url_for('delete_player', player_id=p.id) }}" class="delete-btn" onclick="return confirm('Are you sure you want to delete {{ p.name }}?');">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination Controls -->
+            {% if filter_info.total_pages > 1 %}
+            <nav aria-label="Page navigation" style="margin-top: 30px; display: flex; justify-content: center;">
+                <ul class="pagination" style="margin: 0;">
+                    <!-- Previous Page Link -->
+                    {% if filter_info.current_page > 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('players', page=filter_info.current_page-1, performance=filter_info.performance, min_rating=filter_info.min_rating, max_rating=filter_info.max_rating) }}">
+                                <i class="bi bi-chevron-left"></i> Previous
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link"><i class="bi bi-chevron-left"></i> Previous</span>
+                        </li>
+                    {% endif %}
+
+                    <!-- Page Numbers -->
+                    {% for page_num in range(1, filter_info.total_pages + 1) %}
+                        {% if page_num == filter_info.current_page %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ page_num }}</span>
+                            </li>
+                        {% elif page_num == 1 or page_num == filter_info.total_pages or (page_num >= filter_info.current_page - 1 and page_num <= filter_info.current_page + 1) %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('players', page=page_num, performance=filter_info.performance, min_rating=filter_info.min_rating, max_rating=filter_info.max_rating) }}">
+                                    {{ page_num }}
+                                </a>
+                            </li>
+                        {% elif page_num == 2 and filter_info.current_page > 3 %}
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        {% elif page_num == filter_info.total_pages - 1 and filter_info.current_page < filter_info.total_pages - 2 %}
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    <!-- Next Page Link -->
+                    {% if filter_info.current_page < filter_info.total_pages %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('players', page=filter_info.current_page+1, performance=filter_info.performance, min_rating=filter_info.min_rating, max_rating=filter_info.max_rating) }}">
+                                Next <i class="bi bi-chevron-right"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">Next <i class="bi bi-chevron-right"></i></span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+            <!-- Page Info -->
+            <div style="text-align: center; margin-top: 20px; color: #666; font-weight: 500;">
+                <p>Page {{ filter_info.current_page }} of {{ filter_info.total_pages }} • Total Players: {{ players|length }} on this page</p>
+            </div>
+            {% endif %}
+        {% else %}
+            <div class="empty-state">
+                <i class="bi bi-inbox"></i>
+                <p>No players found. Add your first player using the form above!</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <a href="{{ url_for('dashboard') }}" class="back-btn">
+        <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function predictPlayerStats() {
+        // Get input values
+        const name = document.getElementById('name').value;
+        const age = parseInt(document.getElementById('age').value) || 0;
+        const positions = document.getElementById('positions').value;
+        const rating = parseFloat(document.getElementById('overall_rating').value) || 0;
+
+        // Check if all required fields are filled
+        if (!name || age === 0 || !positions || rating === 0) {
+            document.getElementById('predictionSection').style.display = 'none';
+            return;
+        }
+
+        // ✅ FIXED LOGIC: Predict cluster and performance based ONLY on overall_rating
+        let predictedCluster;
+        let predictedPerformance;
+
+        // Determine performance and cluster based solely on overall_rating
+        if (rating >= 81) {
+            predictedPerformance = "Top Performer";
+            predictedCluster = 0;
+        } else if (rating >= 51) {
+            predictedPerformance = "Average Performer";
+            predictedCluster = 1;
+        } else {
+            predictedPerformance = "Low Performer";
+            predictedCluster = 2;
+        }
+
+        // Update hidden fields with predicted values
+        document.getElementById('cluster').value = predictedCluster;
+        document.getElementById('performance_label').value = predictedPerformance;
+
+        // Display predictions
+        document.getElementById('predictionCluster').textContent = `Cluster ${predictedCluster}`;
+        document.getElementById('predictionPerformance').textContent = predictedPerformance;
+
+        // Show prediction section
+        document.getElementById('predictionSection').style.display = 'block';
+    }
+
+    // Refresh predictions when form is reset
+    document.getElementById('playerForm').addEventListener('reset', function() {
+        document.getElementById('predictionSection').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>

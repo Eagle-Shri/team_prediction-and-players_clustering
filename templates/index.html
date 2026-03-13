@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>⚽ Football Player Performance Analysis - Coach Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+        }
+
+        nav {
+            background: rgba(0,0,0,0.8);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .features {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .features h2 {
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        footer {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="/">⚽ Football Coach</a>
+    <div>
+        <a href="{{ url_for('login') }}">Coach Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>🏆 Football Player Performance Analysis</h1>
+    <p>AI-powered clustering based player performance management system</p>
+    <a href="{{ url_for('login') }}" class="btn btn-primary">Coach Login</a>
+    <a href="{{ url_for('register') }}" class="btn btn-outline">Create Account</a>
+</div>
+
+<div class="container">
+    <div class="features">
+        <h2>✨ System Features</h2>
+        <div class="features-grid">
+            <div class="feature-item">👤 Player CRUD Management</div>
+            <div class="feature-item">📊 Performance Categorization</div>
+            <div class="feature-item">🤖 K-Means Clustering</div>
+            <div class="feature-item">📋 MongoDB Activity Logging</div>
+            <div class="feature-item">🔍 Fast Player Search</div>
+            <div class="feature-item">🔐 Secure Session Handling</div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    Football Player Performance Analysis System © 2026
+</footer>
+
+</body>
+</html>

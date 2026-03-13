@@ -1,0 +1,12 @@
+flask
+flask-login
+flask-cors
+flask-sqlalchemy
+pymongo
+flask-pymongo
+pandas
+numpy
+scikit-learn
+joblib
+mysqlclient
+werkzeug

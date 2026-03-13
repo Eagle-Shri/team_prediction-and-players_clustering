@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Coach Registration - Football Performance System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            color: #f0f0f0;
+            transform: translateX(-5px);
+        }
+
+        .register-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+
+        .register-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .register-header h1 {
+            font-size: 2.2em;
+            margin: 0 0 15px 0;
+            font-weight: 700;
+        }
+
+        .register-header p {
+            margin: 0;
+            opacity: 0.95;
+            font-size: 0.95em;
+        }
+
+        .register-body {
+            padding: 40px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            margin-bottom: 20px;
+            padding: 14px;
+            border-radius: 8px;
+            animation: slideDown 0.3s ease;
+            border-left: 4px solid;
+        }
+
+        .message.danger {
+            background: #f8d7da;
+            color: #721c24;
+            border-left-color: #dc3545;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border-left-color: #28a745;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .password-match-indicator {
+            font-size: 12px;
+            margin-top: 5px;
+            height: 20px;
+        }
+
+        .password-match-indicator.match {
+            color: #28a745;
+        }
+
+        .password-match-indicator.no-match {
+            color: #dc3545;
+        }
+
+        .links {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .links p {
+            margin: 10px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .links a:hover {
+            color: #764ba2;
+        }
+
+        .info-box {
+            background: #f0f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .requirements {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+            font-size: 0.9em;
+            color: #856404;
+        }
+
+        .requirements ul {
+            margin: 10px 0 0 20px;
+            padding: 0;
+        }
+
+        .requirements li {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                margin-top: 50px;
+            }
+
+            .register-header {
+                padding: 35px 20px;
+            }
+
+            .register-header h1 {
+                font-size: 1.8em;
+            }
+
+            .register-body {
+                padding: 30px 20px;
+            }
+
+            .back-link {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">
+        <i class="bi bi-arrow-left"></i> Back to Home
+    </a>
+
+    <div class="register-container">
+        <div class="register-header">
+            <h1>📝 Register</h1>
+            <p>Create Your Coach Account</p>
+        </div>
+
+        <div class="register-body">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="message {{ category }}">
+                            {% if category == 'success' %}
+                                <i class="bi bi-check-circle"></i>
+                            {% else %}
+                                <i class="bi bi-exclamation-circle"></i>
+                            {% endif %}
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="info-box">
+                <strong>💡 Create your account</strong> to manage players and access the performance analysis dashboard.
+            </div>
+
+            <form method="POST" id="registrationForm">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="bi bi-person"></i> Username
+                    </label>
+                    <input type="text" id="username" name="username" placeholder="Choose a unique username" required minlength="3">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        <i class="bi bi-envelope"></i> Email Address
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="bi bi-lock"></i> Password
+                    </label>
+                    <input type="password" id="password" name="password" placeholder="Create a strong password" required minlength="6" onkeyup="checkPasswordMatch()">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">
+                        <i class="bi bi-lock-check"></i> Confirm Password
+                    </label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" required minlength="6" onkeyup="checkPasswordMatch()">
+                    <div class="password-match-indicator" id="passwordIndicator"></div>
+                </div>
+
+                <div class="requirements">
+                    <strong>📋 Registration Requirements:</strong>
+                    <ul>
+                        <li>Username must be at least 3 characters</li>
+                        <li>Password must be at least 6 characters</li>
+                        <li>Passwords must match</li>
+                        <li>Valid email address required</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="btn">
+                    <i class="bi bi-person-plus"></i> Create Account
+                </button>
+            </form>
+
+            <div class="links">
+                <p>Already have an account? <a href="{{ url_for('login') }}">🔐 Login here</a></p>
+                <p><a href="{{ url_for('index') }}">← Back to Home</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const indicator = document.getElementById('passwordIndicator');
+
+            if (confirmPassword === '') {
+                indicator.textContent = '';
+                return;
+            }
+
+            if (password === confirmPassword) {
+                indicator.textContent = '✓ Passwords match';
+                indicator.className = 'password-match-indicator match';
+            } else {
+                indicator.textContent = '✗ Passwords do not match';
+                indicator.className = 'password-match-indicator no-match';
+            }
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match. Please try again.');
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
