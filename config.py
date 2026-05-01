@@ -9,15 +9,14 @@ class Config:
     # ======================
     # 🐬 MySQL Configuration
     # ======================
-    MYSQL_USER = "root"
-    MYSQL_PASSWORD = quote_plus("Shrikant@7676")
+    MYSQL_USER = "username"
+    MYSQL_PASSWORD = quote_plus("your password")
     MYSQL_HOST = "localhost"
     MYSQL_PORT = 3306
     MYSQL_DB = "label_dbms"
 
     SQLALCHEMY_DATABASE_URI = (
-        f"mysql+mysqldb://{MYSQL_USER}:{MYSQL_PASSWORD}@"
-        f"{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
+      your url;
     )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -32,8 +31,7 @@ class Config:
     #  MongoDB Atlas Configuration
     # ======================
     MONGO_URI = (
-        "mongodb+srv://shrikanth123:shrikanth123@cluster0.wsoiviz.mongodb.net/"
-        "?retryWrites=true&w=majority&appName=Cluster0"
+        your url;
     )
 
     
